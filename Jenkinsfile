@@ -1,10 +1,16 @@
 pipeline {
-    agent any  // Jenkins puede ejecutar en cualquier nodo disponible
+    agent any
 
     stages {
         stage('Clonar Repositorio') {
             steps {
-                git 'https://github.com/TU_USUARIO/SistemaGestion.git'
+                git 'https://github.com/Jcbarahon/SistemaGestion.git'
+            }
+        }
+
+        stage('Instalar Dependencias') {
+            steps {
+                bat 'dotnet restore'  // Restaura paquetes NuGet
             }
         }
 
@@ -20,9 +26,9 @@ pipeline {
             }
         }
 
-        stage('Publicar Reportes') {
+        stage('Publicar Reportes de Pruebas') {
             steps {
-                junit '**/TestResults/*.trx'  // Publica reportes de pruebas
+                junit '**/TestResults/*.trx'
             }
         }
     }

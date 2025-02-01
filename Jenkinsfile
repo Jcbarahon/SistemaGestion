@@ -4,14 +4,13 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                // Asegúrate de que se esté clonando la rama main
                 git branch: 'main', url: 'https://github.com/Jcbarahon/SistemaGestion.git'
             }
         }
 
         stage('Instalar Dependencias') {
             steps {
-                bat 'dotnet restore'
+                bat 'dotnet restore SistemaGestion.sln'  // Asegurar que busca el archivo correcto
             }
         }
 
